@@ -1,0 +1,47 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "cSpell.words": [
+      "antfu",
+      "demi",
+      "iconify",
+      "intlify",
+      "Maska",
+      "pinia",
+      "pnpm",
+      "quickbooks",
+      "semibold",
+      "tailwindcss",
+      "tiptap",
+      "unocss",
+      "unplugin",
+      "useVuelidate",
+      "Vite",
+      "vitejs",
+      "Vitesse",
+      "vitest",
+      "vueuse"
+    ],
+    "prettier.enable": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "files.associations": {
+      "*.css": "postcss"
+    },
+    "editor.formatOnSave": false,
+    "debug.allowBreakpointsEverywhere": true,
+    "files.autoGuessEncoding": true,
+    "files.exclude": {
+      "**/.vscode": true,
+      "compile_commands.json": true,
+      "*.hrccproj": true,
+      "*.sln": true,
+      "*.suo": true
+    },
+  }
+}
