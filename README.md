@@ -19,3 +19,5 @@ yarn dev
 ```sh
 yarn build
 ```
+
+<img src="./weather.png" />
