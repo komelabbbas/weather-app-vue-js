@@ -20,4 +20,8 @@ yarn dev
 yarn build
 ```
 
-<img src="./weather.png" />
+<img src="./weather1.png" />
+<br/>
+<img src="./weather2.png" />
+<br/>
+<img src="./weather3.png" />
