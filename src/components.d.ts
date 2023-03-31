@@ -5,12 +5,8 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    AnimatedPlaceholder: typeof import('./components/AnimatedPlaceholder.vue')['default']
     AsyncCityView: typeof import('./components/AsyncCityView.vue')['default']
-    BaseModal: typeof import('./components/BaseModal.vue')['default']
     CityCard: typeof import('./components/CityCard.vue')['default']
-    CityCardSkeleton: typeof import('./components/CityCardSkeleton.vue')['default']
-    CityViewSkeleton: typeof import('./components/CityViewSkeleton.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchBar: typeof import('./components/SearchBar.vue')['default']

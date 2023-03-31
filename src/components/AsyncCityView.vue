@@ -49,9 +49,7 @@
       <p class="capitalize">
         {{ weatherData.current.weather[0].description }}
       </p>
-      <img class="w-[150px] h-auto" :src="
-        `http://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@2x.png`
-      " alt="" />
+      <img class="w-[150px] h-auto" :src="`${imageUrl}/${weatherData.current.weather[0].icon}@2x.png`" alt="" />
     </div>
 
     <hr class="border-white border-opacity-10 border w-full" />
@@ -71,9 +69,7 @@
                 })
               }}
             </p>
-            <img class="w-auto h-[50px] object-cover" :src="
-              `http://openweathermap.org/img/wn/${hourData.weather[0].icon}@2x.png`
-            " alt="" />
+            <img class="w-auto h-[50px] object-cover" :src="`${imageUrl}/${hourData.weather[0].icon}@2x.png`" alt="" />
             <p class="text-xl">
               {{ Math.round(hourData.temp) }}&deg;
             </p>
@@ -99,9 +95,7 @@
               )
             }}
           </p>
-          <img class="w-[50px] h-[50px] object-cover" :src="
-            `http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`
-          " alt="" />
+          <img class="w-[50px] h-[50px] object-cover" :src="`${imageUrl}/${day.weather[0].icon}@2x.png`" alt="" />
           <div class="flex gap-2 flex-1 justify-end">
             <p>H: {{ Math.round(day.temp.max) }}</p>
             <p>L: {{ Math.round(day.temp.min) }}</p>
@@ -120,10 +114,12 @@ import axios from "axios";
 const route = useRoute();
 const router = useRouter();
 
+const imageUrl = computed(() => `${import.meta.env.VITE_WEATHER_BASE_URL}/img/wn`);
+
 async function getWeatherData() {
   try {
     const weatherData = await axios.get(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${route.query.lat}&lon=${route.query.lng}&exclude={part}&appid=7efa332cf48aeb9d2d391a51027f1a71&units=imperial`
+      `${import.meta.env.VITE_WEATHER_API_URL}/data/2.5/onecall?lat=${route.query.lat}&lon=${route.query.lng}&exclude={part}&appid=${import.meta.env.VITE_WEATHER_ID}&units=imperial`
     );
 
     // cal current date & time
