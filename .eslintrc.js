@@ -1,4 +1,4 @@
-/* eslint-env node */
+// .eslintrc.js
 module.exports = {
   root: true,
   extends: ['@antfu'],
