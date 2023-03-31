@@ -142,7 +142,7 @@ async function getWeatherData() {
 }
 
 function back() {
-  router.push('/')
+  router.push({ name: 'home', query: { search: true } })
 }
 
 const weatherData = await getWeatherData();
