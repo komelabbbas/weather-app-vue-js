@@ -119,7 +119,7 @@ const imageUrl = computed(() => `${import.meta.env.VITE_WEATHER_BASE_URL}/img/wn
 async function getWeatherData() {
   try {
     const weatherData = await axios.get(
-      `${import.meta.env.VITE_WEATHER_API_URL}/data/2.5/onecall?lat=${route.query.lat}&lon=${route.query.lng}&exclude={part}&appid=${import.meta.env.VITE_WEATHER_ID}&units=imperial`
+      `${import.meta.env.VITE_WEATHER_API_URL}/data/2.5/onecall?lat=${route.query.lat}&lon=${route.query.lng}&appid=${import.meta.env.VITE_WEATHER_ID}&units=metric`
     );
 
     // cal current date & time
