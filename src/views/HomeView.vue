@@ -48,7 +48,7 @@ async function getCurrentCity(pos) {
       lng,
     }
 
-    if (confirm(`Would you like to  Check ${city} city current weather?`) == true) {
+    if (confirm(`Would you like to check ${city} city weather?`) == true) {
       gotoViewPage(params)
     }
 
