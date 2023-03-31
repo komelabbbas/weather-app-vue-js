@@ -1,17 +1,17 @@
+<script setup>
+import { RouterView } from 'vue-router'
+</script>
+
 <template>
   <div class="flex flex-col min-h-screen font-Roboto bg-weather-primary">
     <SiteNavigation />
-    <RouterView class="flex-1" v-slot="{ Component }">
+    <RouterView v-slot="{ Component }" class="flex-1">
       <Transition name="page">
         <component :is="Component" />
       </Transition>
     </RouterView>
   </div>
 </template>
-
-<script setup>
-import { RouterView } from "vue-router";
-</script>
 
 <style>
 .page-enter-active {

@@ -1,25 +1,31 @@
-# vue-project
+# Weather App Project
 
-This template should help get you started developing with Vue 3 in Vite.
+Simple Weather App.
 
+<br>
 ## Project Setup
 
 ```sh
 yarn install
 ```
 
+<br>
 ### Compile and Hot-Reload for Development
 
 ```sh
 yarn dev
 ```
 
+<br>
 ### Compile and Minify for Production
 
 ```sh
 yarn build
 ```
 
+<br>
+<img src="./src/images/weather4.png" />
+<br/>
 <img src="./src/images/weather1.png" />
 <br/>
 <img src="./src/images/weather2.png" />
