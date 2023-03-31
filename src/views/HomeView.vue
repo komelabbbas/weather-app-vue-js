@@ -1,5 +1,5 @@
 <template>
-  <main class="container text-white">
+  <main class="w-full max-w-5xl mx-auto text-white">
     <SearchBar @previewCity="previewCity" />
     <AsyncCityView v-if="currentLocationWeatherData" :weatherData="currentLocationWeatherData" />
   </main>

@@ -3,7 +3,7 @@
 
     <!-- Banner -->
     <div v-if="route.query.preview"
-      class="text-white p-4 bg-weather-secondary w-full text-center text-lg flex flex-row items-center max-w-screen-md mt-6 px-8">
+      class="text-white p-4 bg-weather-secondary text-center text-sm sm:text-lg flex flex-row items-center w-full max-w-5xl mt-6 px-8">
 
       <button class="mr-4" @click="back">
         <i class="fa-solid fa-arrow-left pr-2"></i>
@@ -55,7 +55,7 @@
     <hr class="border-white border-opacity-10 border w-full" />
 
     <!-- Hourly Weather -->
-    <div class="max-w-screen-md w-full py-12">
+    <div class="max-w-5xl w-full py-12">
       <div class="mx-8 text-white">
         <h2 class="mb-4">Hourly Weather</h2>
         <div class="flex gap-10 overflow-x-scroll">
@@ -70,7 +70,7 @@
               }}
             </p>
             <img class="w-auto h-[50px] object-cover" :src="`${imageUrl}/${hourData.weather[0].icon}@2x.png`" alt="" />
-            <p class="text-xl">
+            <p class="text-xl mb-4">
               {{ Math.round(hourData.temp) }}&deg;
             </p>
           </div>
@@ -81,7 +81,7 @@
     <hr class="border-white border-opacity-10 border w-full" />
 
     <!-- Weekly Weather -->
-    <div class="max-w-screen-md w-full py-12">
+    <div class="w-full max-w-5xl py-12">
       <div class="mx-8 text-white">
         <h2 class="mb-4">7 Day Forecast</h2>
         <div v-for="day in weatherData.daily" :key="day.dt" class="flex items-center">
