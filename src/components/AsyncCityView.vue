@@ -11,14 +11,14 @@
       </button>
       <div class="flex-1">
         <p class="text-center">
-          You are currently previewing <span class="lowercase">{{ route.params.city }}</span> city
+          You are currently previewing <span class="lowercase">{{ data.city }}</span> city
         </p>
       </div>
     </div>
 
     <!-- Weather Overview -->
     <div class="flex flex-col items-center text-white py-12">
-      <h1 class="text-4xl mb-2">{{ route.params.city }}</h1>
+      <h1 class="text-4xl mb-2">{{ data.city }}</h1>
       <p class="text-sm mb-12">
         {{
           new Date(weatherData.currentTime).toLocaleDateString(
@@ -109,41 +109,26 @@
 </template>
 
 <script setup>
-import axios from "axios";
+defineProps({
+  weatherData: {
+    type: Object,
+    default: () => { },
+  },
+});
 
 const route = useRoute();
 const router = useRouter();
 
 const imageUrl = computed(() => `${import.meta.env.VITE_WEATHER_BASE_URL}/img/wn`);
 
-async function getWeatherData() {
-  try {
-    const weatherData = await axios.get(
-      `${import.meta.env.VITE_WEATHER_API_URL}/data/2.5/onecall?lat=${route.query.lat}&lon=${route.query.lng}&appid=${import.meta.env.VITE_WEATHER_ID}&units=metric`
-    );
-
-    // cal current date & time
-    const localOffset = new Date().getTimezoneOffset() * 60000;
-    const utc = weatherData.data.current.dt * 1000 + localOffset;
-    weatherData.data.currentTime =
-      utc + 1000 * weatherData.data.timezone_offset;
-
-    // cal hourly weather offset
-    weatherData.data.hourly.forEach((hour) => {
-      const utc = hour.dt * 1000 + localOffset;
-      hour.currentTime =
-        utc + 1000 * weatherData.data.timezone_offset;
-    });
-
-    return weatherData.data;
-  } catch (err) {
-    console.log(err);
+const data = computed(() => {
+  return {
+    city: route.params?.city ?? route.query?.city
   }
-}
+})
 
 function back() {
-  router.push({ name: 'home', query: { search: true } })
+  router.push({ name: 'home' })
 }
 
-const weatherData = await getWeatherData();
 </script>

@@ -18,12 +18,6 @@
       </template>
     </ul>
   </div>
-  <div class="flex flex-col gap-4">
-    <p>
-      No locations added. To start tracking a location, search in
-      the field above.
-    </p>
-  </div>
 </template>
 
 <script setup>

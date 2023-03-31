@@ -1,14 +1,28 @@
 <template>
   <main class="container text-white">
     <SearchBar @previewCity="previewCity" />
+    <AsyncCityView v-if="currentLocationWeatherData" :weatherData="currentLocationWeatherData" />
   </main>
 </template>
 
 <script setup>
 import axios from "axios";
 
+const currentLocationWeatherData = ref(null)
+
 const router = useRouter();
-const route = useRoute();
+
+function previewCity(searchResult) {
+  const [city, state] = searchResult.place_name.split(",");
+  const params = {
+    state: state.replaceAll(" ", ""),
+    city: city,
+    lat: searchResult.geometry.coordinates[1],
+    lng: searchResult.geometry.coordinates[0],
+  }
+
+  gotoViewPage(params)
+}
 
 function gotoViewPage(params) {
   router.push({
@@ -22,15 +36,25 @@ function gotoViewPage(params) {
   });
 }
 
-function previewCity(searchResult) {
-  const [city, state] = searchResult.place_name.split(",");
-  const params = {
-    state: state.replaceAll(" ", ""),
-    city: city,
-    lat: searchResult.geometry.coordinates[1],
-    lng: searchResult.geometry.coordinates[0],
-  }
-  gotoViewPage(params)
+async function fetchCurrentLocationWeatherData(params) {
+  const weatherData = await axios.get(
+    `${import.meta.env.VITE_WEATHER_API_URL}/data/2.5/onecall?lat=${params.lat}&lon=${params.lng}&appid=${import.meta.env.VITE_WEATHER_ID}&units=metric`
+  );
+
+  // cal current date & time
+  const localOffset = new Date().getTimezoneOffset() * 60000;
+  const utc = weatherData.data.current.dt * 1000 + localOffset;
+  weatherData.data.currentTime =
+    utc + 1000 * weatherData.data.timezone_offset;
+
+  // cal hourly weather offset
+  weatherData.data.hourly.forEach((hour) => {
+    const utc = hour.dt * 1000 + localOffset;
+    hour.currentTime =
+      utc + 1000 * weatherData.data.timezone_offset;
+  });
+
+  currentLocationWeatherData.value = weatherData.data;
 }
 
 async function getCurrentCity(pos) {
@@ -41,30 +65,25 @@ async function getCurrentCity(pos) {
     const url = `https://api.openweathermap.org/data/2.5/weather?appid=${import.meta.env.VITE_WEATHER_ID}&units=imperial&lat=${lat}&lon=${lng}`
     const response = await axios.get(url)
     const city = response.data.name
+    const state = response.data.sys.country
     const params = {
-      state: response.data.sys.country,
+      state,
       city,
       lat,
       lng,
     }
 
-    if (confirm(`Would you like to check ${city} city weather?`) == true) {
-      gotoViewPage(params)
-    }
+    await fetchCurrentLocationWeatherData(params)
 
-
+    router.replace({ query: params })
   } catch (err) {
   }
 }
 
-
-if (!route.query?.search) {
-  navigator.geolocation.getCurrentPosition(
-    pos => getCurrentCity(pos),
-    err => {
-      console.log('err', err);
-    }
-  )
-}
-
+navigator.geolocation.getCurrentPosition(
+  pos => getCurrentCity(pos),
+  err => {
+    console.log('err', err);
+  }
+)
 </script>
