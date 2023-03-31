@@ -1,7 +1,7 @@
 <template>
-  <div class="pt-4 mb-8 relative">
+  <div class="pt-4 mb-8 relative mx-12 md:mx-0 lg:mx-0">
     <input type="text" v-model="searchQuery" @input="getSearchResults" placeholder="Search for a city or state"
-      class="py-2 w-full bg-transparent border-b focus:border-weather-secondary focus:outline-none focus:shadow-[0px_1px_0_0_#004E71]" />
+      class="py-2 w-full bg-transparent border-b focus:outline-none" />
 
     <ul class="absolute bg-weather-secondary text-white w-full shadow-md py-2 top-[66px]" v-if="mapboxSearchResults">
       <p class="py-2" v-if="searchError">

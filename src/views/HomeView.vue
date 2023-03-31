@@ -62,7 +62,7 @@ async function getCurrentCity(pos) {
     const lat = pos.coords.latitude;
     const lng = pos.coords.longitude;
 
-    const url = `https://api.openweathermap.org/data/2.5/weather?appid=${import.meta.env.VITE_WEATHER_ID}&units=imperial&lat=${lat}&lon=${lng}`
+    const url = `${import.meta.env.VITE_WEATHER_API_URL}/data/2.5/weather?appid=${import.meta.env.VITE_WEATHER_ID}&units=imperial&lat=${lat}&lon=${lng}`
     const response = await axios.get(url)
     const city = response.data.name
     const state = response.data.sys.country
