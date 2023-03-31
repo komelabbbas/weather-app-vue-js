@@ -1,12 +1,21 @@
 <template>
   <div class="flex flex-col flex-1 items-center">
+
     <!-- Banner -->
-    <div v-if="route.query.preview" class="text-white p-4 bg-weather-secondary w-full text-center">
-      <p>
-        You are currently previewing this city, click the "+"
-        icon to start tracking this city.
-      </p>
+    <div v-if="route.query.preview"
+      class="text-white p-4 bg-weather-secondary w-full text-center text-lg flex flex-row items-center max-w-screen-md mt-6 px-8">
+
+      <button class="mr-4" @click="back">
+        <i class="fa-solid fa-arrow-left pr-2"></i>
+        Back
+      </button>
+      <div class="flex-1">
+        <p class="text-center">
+          You are currently previewing <span class="lowercase">{{ route.params.city }}</span> city
+        </p>
+      </div>
     </div>
+
     <!-- Weather Overview -->
     <div class="flex flex-col items-center text-white py-12">
       <h1 class="text-4xl mb-2">{{ route.params.city }}</h1>
@@ -101,11 +110,7 @@
       </div>
     </div>
 
-    <div class="flex items-center gap-2 py-12 text-white cursor-pointer duration-150 hover:text-red-500"
-      @click="removeCity">
-      <i class="fa-solid fa-trash"></i>
-      <p>Remove City</p>
-    </div>
+
   </div>
 </template>
 
@@ -113,7 +118,9 @@
 import axios from "axios";
 
 const route = useRoute();
-const getWeatherData = async () => {
+const router = useRouter();
+
+async function getWeatherData() {
   try {
     const weatherData = await axios.get(
       `https://api.openweathermap.org/data/2.5/onecall?lat=${route.query.lat}&lon=${route.query.lng}&exclude={part}&appid=7efa332cf48aeb9d2d391a51027f1a71&units=imperial`
@@ -136,21 +143,11 @@ const getWeatherData = async () => {
   } catch (err) {
     console.log(err);
   }
-};
-const weatherData = await getWeatherData();
+}
 
-const router = useRouter();
-const removeCity = () => {
-  const cities = JSON.parse(localStorage.getItem("savedCities"));
-  const updatedCities = cities.filter(
-    (city) => city.id !== route.query.id
-  );
-  localStorage.setItem(
-    "savedCities",
-    JSON.stringify(updatedCities)
-  );
-  router.push({
-    name: "home",
-  });
-};
+function back() {
+  router.push('/')
+}
+
+const weatherData = await getWeatherData();
 </script>

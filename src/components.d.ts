@@ -10,10 +10,10 @@ declare module '@vue/runtime-core' {
     BaseModal: typeof import('./components/BaseModal.vue')['default']
     CityCard: typeof import('./components/CityCard.vue')['default']
     CityCardSkeleton: typeof import('./components/CityCardSkeleton.vue')['default']
-    CityList: typeof import('./components/CityList.vue')['default']
     CityViewSkeleton: typeof import('./components/CityViewSkeleton.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SearchBar: typeof import('./components/SearchBar.vue')['default']
     SiteNavigation: typeof import('./components/SiteNavigation.vue')['default']
   }
 }

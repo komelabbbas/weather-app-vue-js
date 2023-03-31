@@ -10,7 +10,7 @@ const router = createRouter({
       name: "home",
       component: HomeView,
       meta: {
-        title: "Home",
+        title: "",
       },
     },
     {
@@ -25,11 +25,15 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  if(to.params.state)
   document.title = `${
     to.params.state
       ? `${to.params.city}, ${to.params.state}`
       : to.meta.title
-  } | The Local Weather`;
+  } | Weather App`;
+  else {
+    document.title = `Weather App`;
+  }
   next();
 });
 
